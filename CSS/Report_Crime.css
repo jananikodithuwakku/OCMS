@@ -47,6 +47,70 @@ nav ul li a:hover {
     color: #ffcc00;
 }
 
+/* Style the translate dropdown container */
+#google_translate_element {
+    text-align: right; /* Aligns to the right */
+    margin: 10px 20px;
+    padding: 5px;
+}
+
+/* Style the Google Translate dropdown */
+.goog-te-gadget {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+
+/* Hide Google branding (Optional) */
+.goog-te-gadget span {
+    display: none;
+}
+
+/* Style the dropdown select box */
+.goog-te-combo {
+    font-size: 14px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: white;
+}
+
+/* Change the dropdown arrow icon */
+.goog-te-combo:after {
+    content: " ▼";
+    font-size: 12px;
+    color: #555;
+}
+
+/* Make the dropdown look good on hover */
+.goog-te-combo:hover {
+    border-color: #007bff;
+}
+
+/* Translate Toolbar (If shown at the top, hide it) */
+.goog-te-banner-frame {
+    display: none !important;
+}
+
+/* Hide the Google Translate Pop-up */
+body {
+    top: 0px !important;
+}
+
+/* Ensure proper spacing in mobile view */
+@media (max-width: 768px) {
+    #google_translate_element {
+        text-align: center;
+    }
+}
+
+
 /* Main Content */
 main {
     text-align: center;

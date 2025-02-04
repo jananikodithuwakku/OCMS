@@ -21,13 +21,27 @@ if(!isset($_SESSION["user"])){
         <nav>
             <ul>
                 <li><a href="Home.html">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="Features.php">Features</a></li>
+                <li><a href="Contact.php">Contact</a></li>
                 <li><a href="Login.php">Login</a></li>
                 <li><a href="Logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
+
+    <div id="google_translate_element"></div>
+
+   <script type="text/javascript">
+       function googleTranslateElementInit() {
+           new google.translate.TranslateElement(
+                {pageLanguage: 'en', includedLanguages: 'en,si,ta', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 
+                'google_translate_element'
+            );
+         }
+    </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
     <main>
         <h2>Report Crime</h2>
