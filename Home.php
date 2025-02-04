@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Crime Management System</title>
+    <link rel="stylesheet" href="CSS/Home.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="Images/Logo.png" >
+            <h1>Online Crime Management System</h1>
+        </div>
+        <nav>
+            <ul class="navbar">
+                <li><a href="Home.php">Home</a></li>
+                <li><a href="Contact.php">Contact</a></li>
+                <li><a href="Features.php">Features</a></li>
+                <li><a href="About.php">About Us</a></li>
+                <li><a href="Login.php">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Banner Section -->
+    <main>
+        <div class="banner-container">
+            <h2>Welcome to the Online Crime Management System</h2>
+            <p>Streamline crime reporting and tracking for a safer community.</p>
+        </div>
+    </main>
+        <!-- Features Section -->
+    <section id="features" class="features-section">
+            <h2>Our Features </h2>
+        <div class="feature">
+            <div class="card"><a href="Report_Crime.php">Report Crime</a></div>
+            <div class="card"><a href="#">View Crime Map</a></div>
+            <div class="card"><a href="Tips.php">Safety Tips and Geolocation-based Alerts</a></div>
+            <div class="card"><a href="#">View Complaints Status</a></div>
+        </div>
+    </section>   
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h3>Contact Us</h3>
+            <form action="Contact.php" method="post" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Online Crime Management System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
