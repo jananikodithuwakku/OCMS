@@ -72,6 +72,6 @@
         <p>&copy; 2025 Online Crime Management System. All Rights Reserved.</p>
     </footer>
 
-    <script src="Tips.js"></script>
+    <script src="JS/Tips.js"></script>
 </body>
 </html>
