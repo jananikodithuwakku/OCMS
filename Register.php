@@ -15,6 +15,18 @@ if(isset($_SESSION["user"])){
     <link rel="stylesheet" href="CSS/Register.css">
 </head>
 <body>
+<header>
+        <div class="logo">
+            <img src="Images/Logo.png" >
+            <h1>Online Crime Management System</h1>
+        </div>
+        <nav>
+            <ul class="navbar">
+                <li><a href="Home.php">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    
     <div class="container">
         <?php
         if(isset($_POST["submit"])){
