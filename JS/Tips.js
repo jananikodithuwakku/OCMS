@@ -25,10 +25,7 @@ function sendLocation(position) {
         }
     };
 
-    // Log the parameters to make sure they are being sent
-    let params = `latitude=${latitude}&longitude=${longitude}&email=${userEmail}`;
-    console.log("Sending data:", params);  // Check the data before sending
-
+    let params = `email=${userEmail}&latitude=${latitude}&longitude=${longitude}&register=true`;
     xhr.send(params);
 }
 
