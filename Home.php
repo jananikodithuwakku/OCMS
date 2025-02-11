@@ -52,7 +52,7 @@
             <div class="card"><a href="Report_Crime.php">Report Crime</a></div>
             <div class="card"><a href="#">View Crime Map</a></div>
             <div class="card"><a href="Tips.php">Safety Tips and Geolocation-based Alerts</a></div>
-            <div class="card"><a href="#">View Complaints Status</a></div>
+            <div class="card"><a href="citizen_dashboard.php">View Complaints Status</a></div>
         </div>
     </section>   
 

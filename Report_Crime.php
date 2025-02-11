@@ -7,6 +7,14 @@ if (!isset($_SESSION["user"])) {
 
 include 'database.php';
 
+// Load PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'vendor/autoload.php';
+
+// Police officer's email
+$police_email = "kodithuwakkujanani@gmail.com";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -25,14 +33,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mkdir($targetDir, 0777, true);
         }
         $evidence = $targetDir . basename($_FILES["evidence"]["name"]);
-        move_uploaded_file($_FILES["evidence"]["tmp_name"], $evidence);
+        if (!move_uploaded_file($_FILES["evidence"]["tmp_name"], $evidence)) {
+            $evidence = ""; // Reset evidence if upload fails
+        }
     }
 
+    // Insert report into database
     $sql = "INSERT INTO crime_reports (name, email, phone, location, latitude, longitude, date, description, evidence) 
             VALUES ('$name', '$email', '$phone', '$location', '$latitude', '$longitude', '$date', '$description', '$evidence')";
 
     if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('Crime report submitted successfully!');</script>";
+        // Send email notification with attachment
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; 
+            $mail->SMTPAuth = true;
+            $mail->Username = 'kodithuwakkujanani@gmail.com'; // Replace with your Gmail
+            $mail->Password = 'asna zhzz logq vwsz'; // Use an App Password if needed
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->setFrom('your-email@gmail.com', 'OCMS System');
+            $mail->addAddress($police_email);
+            $mail->isHTML(true);
+            $mail->Subject = "New Crime Report Submitted";
+            $mail->Body = "
+                <h2>A new crime report has been submitted</h2>
+                <p><strong>Citizen Name:</strong> $name</p>
+                <p><strong>Email:</strong> $email</p>
+                <p><strong>Phone:</strong> $phone</p>
+                <p><strong>Location:</strong> $location</p>
+                <p><strong>Date:</strong> $date</p>
+                <p><strong>Description:</strong> $description</p>
+                
+            ";
+
+            // Attach evidence if available
+            if (!empty($evidence) && file_exists($evidence)) {
+                $mail->addAttachment($evidence);
+            }
+
+            if ($mail->send()) {
+                echo "<script>alert('Crime report submitted successfully! Email sent to the police with evidence.'); window.location.href='citizen_dashboard.php';</script>";
+            } else {
+                echo "<script>alert('Crime report submitted, but email failed to send.'); window.location.href='citizen_dashboard.php';</script>";
+            }
+        } catch (Exception $e) {
+            echo "<script>alert('Crime report submitted, but email could not be sent. Error: {$mail->ErrorInfo}');</script>";
+        }
     } else {
         echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
     }
@@ -40,6 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($conn);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -1,49 +1,45 @@
-<?php
+<?php 
 include 'database.php';
 
-// Check if 'id' is set in the URL
-if (!isset($_GET['id'])) {
-    die("Error: Complaint ID is missing.");
-}
-
-$complaint_id = intval($_GET['id']); // Ensure the ID is an integer
-
-// Fetch the specific crime report
-$sql = "SELECT * FROM crime_reports WHERE id = $complaint_id";
-$result = mysqli_query($conn, $sql);
-
-if (!$result) {
-    die("Error: " . mysqli_error($conn)); // Handle SQL errors
-}
-
-if (mysqli_num_rows($result) == 0) {
-    die("Error: No complaint found with the provided ID.");
-}
-
-$complaint = mysqli_fetch_assoc($result);
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $update_text = mysqli_real_escape_string($conn, $_POST['update_text']);
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
+    $id = mysqli_real_escape_string($conn, $_POST['id']);
     $status = mysqli_real_escape_string($conn, $_POST['status']);
+    $notes = mysqli_real_escape_string($conn, $_POST['notes']);
 
-    // Insert the update into the updates table
-    $update_sql = "INSERT INTO updates (report_id, update_text) VALUES ($complaint_id, '$update_text')";
-    if (!mysqli_query($conn, $update_sql)) {
-        die("Error: " . mysqli_error($conn));
+    // Check if the 'notes' column exists in the table
+    $column_check_query = "SHOW COLUMNS FROM crime_reports LIKE 'notes'";
+    $column_check_result = mysqli_query($conn, $column_check_query);
+    if (mysqli_num_rows($column_check_result) == 0) {
+        echo "<script>alert('Error: Column \"notes\" does not exist in crime_reports table.');</script>";
+        exit();
     }
 
-    // Update the status of the complaint
-    $status_sql = "UPDATE crime_reports SET status = '$status' WHERE id = $complaint_id";
-    if (!mysqli_query($conn, $status_sql)) {
-        die("Error: " . mysqli_error($conn));
+    // Update the crime_reports table
+    $sql = "UPDATE crime_reports SET status='$status', notes='$notes' WHERE id='$id'";
+    
+    if (mysqli_query($conn, $sql)) {
+        echo "<script>alert('Complaint updated successfully!'); window.location.href='police_dashboard.php';</script>";
+    } else {
+        echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
     }
-
-    echo "<script>alert('Complaint updated successfully!');</script>";
 }
 
-// Fetch all updates for this complaint
-$updates_sql = "SELECT * FROM updates WHERE report_id = $complaint_id ORDER BY update_date DESC";
-$updates_result = mysqli_query($conn, $updates_sql);
+// Fetch the complaint if 'id' is set in the URL
+if (isset($_GET['id'])) {
+    $id = mysqli_real_escape_string($conn, $_GET['id']);
+    $sql = "SELECT * FROM crime_reports WHERE id='$id'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $report = mysqli_fetch_assoc($result);
+    } else {
+        echo "<script>alert('Complaint not found!'); window.location.href='police_dashboard.php';</script>";
+        exit();
+    }
+} else {
+    header("Location: police_dashboard.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,28 +48,40 @@ $updates_result = mysqli_query($conn, $updates_sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Complaint</title>
+    <link rel="stylesheet" href="CSS/Update_Complaint.css">
 </head>
 <body>
-    <h2>Update Complaint</h2>
-    <p><strong>Complaint ID:</strong> <?= $complaint['id'] ?></p>
-    <p><strong>Current Status:</strong> <?= $complaint['status'] ?></p>
-
-    <h3>Add Update</h3>
-    <form method="POST">
-        <textarea name="update_text" placeholder="Enter update details" required></textarea><br><br>
-        <select name="status">
-            <option value="pending">Pending</option>
-            <option value="under_investigation">Under Investigation</option>
-            <option value="resolved">Resolved</option>
-        </select><br><br>
-        <button type="submit">Submit Update</button>
-    </form>
-
-    <h3>Previous Updates</h3>
-    <?php while ($update = mysqli_fetch_assoc($updates_result)): ?>
-    <p><?= $update['update_text'] ?> - <?= $update['update_date'] ?></p>
-    <?php endwhile; ?>
-
-    <a href="View_Complaints.php">Back to Complaints</a>
+    <header>
+        <h1>Update Complaint</h1>
+        <nav>
+            <ul>
+                <li><a href="police_dashboard.php">Back to Dashboard</a></li>
+                <li><a href="Logout.php">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Complaint Details</h2>
+        <form action="" method="POST">
+            <input type="hidden" name="id" value="<?php echo $report['id']; ?>">
+            
+            <label for="status">Status:</label>
+            <select name="status" required>
+                <option value="Pending" <?php if (!empty($report['status']) && $report['status'] == 'Pending') echo 'selected'; ?>>Pending</option>
+                <option value="In Progress" <?php if (!empty($report['status']) && $report['status'] == 'In Progress') echo 'selected'; ?>>In Progress</option>
+                <option value="Resolved" <?php if (!empty($report['status']) && $report['status'] == 'Resolved') echo 'selected'; ?>>Resolved</option>
+            </select>
+            
+            <label for="notes">Investigation Notes:</label>
+            <textarea name="notes" rows="4" required><?php echo htmlspecialchars($report['notes'] ?? ''); ?></textarea>
+            
+            <button type="submit" name="update">Update Complaint</button>
+        </form>
+    </main>
 </body>
 </html>
+
+<?php
+mysqli_close($conn);
+?>

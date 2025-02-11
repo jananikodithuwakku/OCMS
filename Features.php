@@ -131,7 +131,7 @@
             <h2>Our Features</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <a href="report_crime.html">
+                    <a href="Report_Crime.php">
                         <h3>Report Crime</h3>
                         <p>Users can report crimes online, providing detailed information and evidence.</p>
                     </a>
@@ -143,13 +143,13 @@
                     </a>
                 </div>
                 <div class="feature-card">
-                    <a href="case_tracking.html">
+                    <a href="track_complaint.php">
                         <h3>Case Tracking</h3>
                         <p>Users can track the progress of their crime reports and receive updates.</p>
                     </a>
                 </div>
                 <div class="feature-card">
-                    <a href="geolocation_alerts.html">
+                    <a href="Tips.php">
                         <h3>Geolocation Alerts</h3>
                         <p>Receive location-based alerts and safety notifications.</p>
                     </a>

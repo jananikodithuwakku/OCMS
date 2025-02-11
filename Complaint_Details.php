@@ -1,11 +1,22 @@
 <?php
 include 'database.php';
 
-$complaint_id = $_GET['id']; // Get the complaint ID from the URL
+// Validate and retrieve the complaint ID
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $complaint_id = intval($_GET['id']); // Convert to integer for security
+} else {
+    die("Invalid Complaint ID.");
+}
 
 // Fetch the specific crime report
 $sql = "SELECT * FROM crime_reports WHERE id = $complaint_id";
 $result = mysqli_query($conn, $sql);
+
+// Check if the complaint exists
+if (!$result || mysqli_num_rows($result) == 0) {
+    die("Complaint not found.");
+}
+
 $complaint = mysqli_fetch_assoc($result);
 
 // Fetch all updates for this complaint
@@ -22,19 +33,25 @@ $updates_result = mysqli_query($conn, $updates_sql);
 </head>
 <body>
     <h2>Complaint Details</h2>
-    <p><strong>ID:</strong> <?= $complaint['id'] ?></p>
-    <p><strong>Name:</strong> <?= $complaint['name'] ?></p>
-    <p><strong>Email:</strong> <?= $complaint['email'] ?></p>
-    <p><strong>Phone:</strong> <?= $complaint['phone'] ?></p>
-    <p><strong>Location:</strong> <?= $complaint['location'] ?></p>
-    <p><strong>Date:</strong> <?= $complaint['date'] ?></p>
-    <p><strong>Description:</strong> <?= $complaint['description'] ?></p>
-    <p><strong>Status:</strong> <?= $complaint['status'] ?></p>
+    <p><strong>ID:</strong> <?= htmlspecialchars($complaint['id']) ?></p>
+    <p><strong>Name:</strong> <?= htmlspecialchars($complaint['name']) ?></p>
+    <p><strong>Email:</strong> <?= htmlspecialchars($complaint['email']) ?></p>
+    <p><strong>Phone:</strong> <?= htmlspecialchars($complaint['phone']) ?></p>
+    <p><strong>Location:</strong> <?= htmlspecialchars($complaint['location']) ?></p>
+    <p><strong>Date:</strong> <?= htmlspecialchars($complaint['date']) ?></p>
+    <p><strong>Description:</strong> <?= nl2br(htmlspecialchars($complaint['description'])) ?></p>
+    <p><strong>Status:</strong> <?= htmlspecialchars($complaint['status']) ?></p>
 
     <h3>Updates</h3>
-    <?php while ($update = mysqli_fetch_assoc($updates_result)): ?>
-    <p><?= $update['update_text'] ?> - <?= $update['update_date'] ?></p>
-    <?php endwhile; ?>
+    <?php if (mysqli_num_rows($updates_result) > 0): ?>
+        <ul>
+            <?php while ($update = mysqli_fetch_assoc($updates_result)): ?>
+                <li><?= htmlspecialchars($update['update_text']) ?> - <?= htmlspecialchars($update['update_date']) ?></li>
+            <?php endwhile; ?>
+        </ul>
+    <?php else: ?>
+        <p>No updates available.</p>
+    <?php endif; ?>
 
     <a href="View_Complaints.php">Back to Complaints</a>
 </body>
