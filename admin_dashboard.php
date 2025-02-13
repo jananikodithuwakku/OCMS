@@ -1,8 +1,8 @@
 <?php
 include 'database.php';
 
-$user_email = $_SESSION["user"]; // Fetch user email from session
-$sql = "SELECT * FROM crime_reports WHERE email='$user_email' ORDER BY date DESC";
+// Fetch all crime reports from the database
+$sql = "SELECT * FROM crime_reports ORDER BY date DESC";
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -11,22 +11,21 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Track Your Complaint</title>
+    <title>Complaint Reports</title>
     <link rel="stylesheet" href="CSS/Track_Complaint.css">
 </head>
 <body>
     <header>
-        <h1>Track Your Complaint</h1>
+        <h1>Crime Complaint Reports</h1>
         <nav>
             <ul>
                 <li><a href="Home.php">Home</a></li>
-                <li><a href="Logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
     
     <main>
-        <h2>Your Crime Reports</h2>
+        <h2>All Crime Reports</h2>
         <table border="1">
             <tr>
                 <th>Case ID</th>
@@ -39,21 +38,25 @@ $result = mysqli_query($conn, $sql);
             </tr>
             <?php while ($row = mysqli_fetch_assoc($result)) { ?>
             <tr>
-                <td><?php echo $row['id']; ?></td>
-                <td><?php echo $row['date']; ?></td>
-                <td><?php echo $row['location']; ?></td>
-                <td><?php echo $row['description']; ?></td>
-                <td><?php echo $row['status']; ?></td>
+                <td><?= htmlspecialchars($row['id']); ?></td>
+                <td><?= htmlspecialchars($row['date']); ?></td>
+                <td><?= htmlspecialchars($row['location']); ?></td>
+                <td><?= nl2br(htmlspecialchars($row['description'])); ?></td>
+                <td><?= htmlspecialchars($row['status']); ?></td>
                 <td>
                     <?php 
-                    $officer_id = $row['assigned_officer'];
-                    $officer_query = "SELECT name FROM police_officers WHERE id='$officer_id'";
-                    $officer_result = mysqli_query($conn, $officer_query);
-                    $officer = mysqli_fetch_assoc($officer_result);
-                    echo $officer ? $officer['name'] : 'Not Assigned';
+                    if (!empty($row['assigned_officer'])) {
+                        $officer_id = $row['assigned_officer'];
+                        $officer_query = "SELECT name FROM police_officers WHERE id='$officer_id'";
+                        $officer_result = mysqli_query($conn, $officer_query);
+                        $officer = mysqli_fetch_assoc($officer_result);
+                        echo $officer ? htmlspecialchars($officer['name']) : 'Not Assigned';
+                    } else {
+                        echo 'Not Assigned';
+                    }
                     ?>
                 </td>
-                <td><?php echo $row['investigation_updates']; ?></td>
+                <td><?= nl2br(htmlspecialchars($row['investigation_updates'] ?? 'No updates yet.')); ?></td>
             </tr>
             <?php } ?>
         </table>
