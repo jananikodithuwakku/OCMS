@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Crime Management System</title>
     <link rel="stylesheet" href="CSS/Home.css">
+    <link rel="stylesheet" href="CSS/chatbot.css"> <!-- Chatbot Styles -->
 </head>
 <body>
     <!-- Header Section -->
@@ -25,18 +26,15 @@
     </header>
 
     <div id="google_translate_element"></div>
-
     <script type="text/javascript">
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement(
-                    {pageLanguage: 'en', includedLanguages: 'en,si,ta', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 
-                    'google_translate_element'
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en', includedLanguages: 'en,si,ta', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 
+                'google_translate_element'
             );
-     }
+        }
     </script>
-
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 
     <!-- Banner Section -->
     <main>
@@ -45,9 +43,10 @@
             <p>Streamline crime reporting and tracking for a safer community.</p>
         </div>
     </main>
-        <!-- Features Section -->
+
+    <!-- Features Section -->
     <section id="features" class="features-section">
-            <h2>Our Features </h2>
+        <h2>Our Features</h2>
         <div class="feature">
             <div class="card"><a href="Report_Crime.php">Report Crime</a></div>
             <div class="card"><a href="#">View Crime Map</a></div>
@@ -78,9 +77,28 @@
         </div>
     </section>
 
+    <!-- Chatbot Icon and Container -->
+    <div class="chatbot-icon" id="chatbot-icon">
+        <img src="Images/chatbot-icon.png" alt="Chatbot">
+    </div>
+
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chat-header">
+            <span>Chat with Us</span>
+            <button id="close-chatbot">X</button>
+        </div>
+        <div class="chatbox" id="chatbox"></div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Type your message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2025 Online Crime Management System. All Rights Reserved.</p>
     </footer>
+
+    <script src="JS/chatbot.js"></script> <!-- Chatbot JS -->
 </body>
 </html>
