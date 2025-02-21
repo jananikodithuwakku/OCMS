@@ -77,7 +77,7 @@
         </div>
     </section>
 
-    <!-- Chatbot Icon and Container -->
+            <!-- Chatbot Icon and Container -->
     <div class="chatbot-icon" id="chatbot-icon">
         <img src="Images/chatbot-icon.png" alt="Chatbot">
     </div>
@@ -89,7 +89,7 @@
         </div>
         <div class="chatbox" id="chatbox"></div>
         <div class="chat-input">
-            <input type="text" id="chat-input" placeholder="Type your message...">
+            <input type="text" id="chat-input" placeholder="Ask about OCMS..." required>
             <button id="send-btn">Send</button>
         </div>
     </div>

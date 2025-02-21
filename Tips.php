@@ -43,6 +43,18 @@
         </ul>
     </section>
 
+    <section id="crime-rate">
+        <h2>Crime Rate</h2>
+        <p>According to available data, the Western Province, particularly the Colombo district, has the highest crime rate in Sri Lanka, with a significant portion of the country's total grave crimes occurring within this area; other districts with relatively higher crime rates include Gampaha, Kurunegala, and Kalutara, while the Northern and Eastern Provinces generally report lower crime rates. </p>
+        <ul>
+            <li><strong>Key points about Sri Lankan crime rates by district:</strong></li>
+            <ul><li>01. Highest crime areas: <strong>Colombo, Gampaha, Kelaniya (within Colombo)</strong></li></ul>
+            <ul><li>02. Crimes most prevalent in these areas: <strong>Violent crimes, property crimes, drug related offenses </strong></li></ul>
+            <ul><li>03. Factors contributing to high crime rates: <strong>Urban density, poverty, unemployment</strong></li></ul>
+            <ul><li>04. Districts with lower crime rates: Jaffna, <strong>Mullaitivu, Nuwara Eliya, Badulla </strong></li></ul>
+        </ul>
+    </section>
+
     <section id="crime-laws">
         <h2>Crime Laws in Sri Lanka</h2>
         <p>Understanding crime laws can help you stay informed and protected. Below are key laws governing crime in Sri Lanka:</p>
