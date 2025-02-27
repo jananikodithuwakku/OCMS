@@ -49,7 +49,7 @@
         <h2>Our Features</h2>
         <div class="feature">
             <div class="card"><a href="Report_Crime.php">Report Crime</a></div>
-            <div class="card"><a href="#">View Crime Map</a></div>
+            <div class="card"><a href="view-crime-map.php">View Crime Map</a></div>
             <div class="card"><a href="Tips.php">Safety Tips and Geolocation-based Alerts</a></div>
             <div class="card"><a href="citizen_dashboard.php">View Complaints Status</a></div>
         </div>

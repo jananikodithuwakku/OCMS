@@ -137,7 +137,7 @@
                     </a>
                 </div>
                 <div class="feature-card">
-                    <a href="crime_map.html">
+                    <a href="view-crime-map.php">
                         <h3>View Crime Map</h3>
                         <p>Interactive crime map to track criminal activities in different locations.</p>
                     </a>
@@ -161,7 +161,7 @@
                     </a>
                 </div>
                 <div class="feature-card">
-                    <a href="chatbot_assistance.html">
+                    <a href="Home.php">
                         <h3>Chatbot Assistance</h3>
                         <p>Provides support and assistance via AI-driven chatbot.</p>
                     </a>
