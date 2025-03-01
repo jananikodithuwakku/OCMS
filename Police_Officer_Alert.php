@@ -63,7 +63,7 @@
     mysqli_close($conn);
     ?>
     <h1>Officer Crime Alert</h1>
-    <form action="send_alert.php" method="POST">
+    <form action="Police_Officer_send_alert.php" method="POST">
         <label for="latitude">Crime Latitude:</label>
         <input type="text" id="latitude" name="latitude" required>
         <br>

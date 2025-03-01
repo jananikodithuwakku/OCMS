@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $sql = "UPDATE crime_reports SET status='$status', notes='$notes' WHERE id='$id'";
     
     if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('Complaint updated successfully!'); window.location.href='police_dashboard.php';</script>";
+        echo "<script>alert('Complaint updated successfully!'); window.location.href='Police_Oficer_Dashboard.php';</script>";
     } else {
         echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
     }
@@ -33,11 +33,11 @@ if (isset($_GET['id'])) {
     if (mysqli_num_rows($result) > 0) {
         $report = mysqli_fetch_assoc($result);
     } else {
-        echo "<script>alert('Complaint not found!'); window.location.href='police_dashboard.php';</script>";
+        echo "<script>alert('Complaint not found!'); window.location.href='Police_Oficer_Dashboard.php';</script>";
         exit();
     }
 } else {
-    header("Location: police_dashboard.php");
+    header("Location: Police_Oficer_Dashboard.php");
     exit();
 }
 ?>
@@ -55,7 +55,7 @@ if (isset($_GET['id'])) {
         <h1>Update Complaint</h1>
         <nav>
             <ul>
-                <li><a href="police_dashboard.php">Back to Dashboard</a></li>
+                <li><a href="Police_Oficer_Dashboard.php">Back to Dashboard</a></li>
                 <li><a href="Logout.php">Logout</a></li>
             </ul>
         </nav>

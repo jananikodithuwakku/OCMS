@@ -106,6 +106,6 @@ if (isset($_POST['download'])) {
         <button type="submit" name="download" class="download-btn">Download Report as CSV</button>
     </form>
 
-    <a href="View_Complaints.php" class="back-btn">Back to Complaints</a>
+    <a href="Police_Officer_View-Complaints.php" class="back-btn">Back to Complaints</a>
 </body>
 </html>

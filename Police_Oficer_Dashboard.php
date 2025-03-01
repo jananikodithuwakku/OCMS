@@ -1,9 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION["police"])) {
-    header("Location: PLogin.php");
-    exit();
-}
+
 
 include 'database.php';
 
