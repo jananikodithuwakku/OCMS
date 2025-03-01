@@ -166,6 +166,12 @@
                         <p>Provides support and assistance via AI-driven chatbot.</p>
                     </a>
                 </div>
+                <div class="feature-card">
+                    <a href="C_Unresolved.php">
+                        <h3>Unresolved Cases</h3>
+                        <p>User can request with the reason and and can track the progress.</p>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
