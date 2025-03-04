@@ -21,6 +21,7 @@
                 <li><a href="Features.php">Features</a></li>
                 <li><a href="About.php">About Us</a></li>
                 <li><a href="Login.php">Login</a></li>
+                <li><a href="Logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>

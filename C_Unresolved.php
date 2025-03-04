@@ -1,6 +1,14 @@
 <?php
 include 'database.php'; // Include database connection
 
+session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: Unresolved_Login.php");
+    exit();
+}
+
+
+
 // Fetch unresolved cases
 $query = "SELECT * FROM cases WHERE status = 'Unresolved'";
 $result = $conn->query($query);
