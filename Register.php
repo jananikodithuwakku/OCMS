@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION["user"])){
+if (isset($_SESSION["user"])) {
     header("Location: Report_Crime.php");
 }
 ?>
@@ -10,98 +10,158 @@ if(isset($_SESSION["user"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register form </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Register - Online Crime Management System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="CSS/Register.css">
+    <style>
+        body {
+            background-color: #001f3d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group input {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .form-group input::placeholder {
+            color: #ddd;
+        }
+
+        .form-btn {
+            text-align: center;
+        }
+
+        .form-btn input {
+            width: 100%;
+            background: #ffcc00;
+            border: none;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            border-radius: 5px;
+            transition: 0.3s ease;
+        }
+
+        .form-btn input:hover {
+            background: #e6b800;
+        }
+
+        .alert {
+            text-align: center;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .login-link a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<header>
-        <div class="logo">
-            <img src="Images/Logo.png" >
-            <h1>Online Crime Management System</h1>
-        </div>
-        <nav>
-            <ul class="navbar">
-                <li><a href="Home.php">Home</a></li>
-            </ul>
-        </nav>
-    </header>
-    
+
     <div class="container">
+        <h2>User Register</h2>
+
         <?php
-        if(isset($_POST["submit"])){
+        if (isset($_POST["submit"])) {
             $fullName = $_POST["fullname"];
             $email = $_POST["email"];
             $password = $_POST["password"];
             $passwordRepeat = $_POST["repeat_password"];
 
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
             $errors = array();
 
-            if(empty( $fullName) OR empty($email) OR empty($password) OR empty($passwordRepeat)){
+            if (empty($fullName) || empty($email) || empty($password) || empty($passwordRepeat)) {
                 array_push($errors, "All fields are required");
             }
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                array_push($errors,"Email is not valid");
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                array_push($errors, "Email is not valid");
             }
-            if(strlen($password)<8){
-                array_push($errors, "Password must be at least 8 charactes long");
+            if (strlen($password) < 8) {
+                array_push($errors, "Password must be at least 8 characters long");
             }
-            if($password!==$passwordRepeat){
-                array_push($errors, "Password dose not match");
+            if ($password !== $passwordRepeat) {
+                array_push($errors, "Passwords do not match");
             }
-            require_once "database.php" ; 
+
+            require_once "database.php";
             $sql = "SELECT * FROM users WHERE email = '$email'";
             $result = mysqli_query($conn, $sql);
-            $rowCount = mysqli_num_rows($result);
-            if($rowCount>0){
-                array_push($errors,"Email already exists!");
+            if (mysqli_num_rows($result) > 0) {
+                array_push($errors, "Email already exists!");
             }
 
-
-            if(count($errors)>0 ){
-                foreach($errors as $error){
-                    echo "<div class='alert alert-danger'>$error<?div>";
+            if (count($errors) > 0) {
+                foreach ($errors as $error) {
+                    echo "<div class='alert alert-danger'>$error</div>";
                 }
-            }
-            else{
-                require_once "database.php" ;  
-                $sql = "INSERT INTO users (full_name, email, password) VALUES ( ?, ?, ? )";
+            } else {
+                $sql = "INSERT INTO users (full_name, email, password) VALUES (?, ?, ?)";
                 $stmt = mysqli_stmt_init($conn);
-                $prepareStmt = mysqli_stmt_prepare($stmt,$sql);
-                if($prepareStmt){
-                    mysqli_stmt_bind_param($stmt,"sss",$fullName, $email, $passwordHash);
+                if (mysqli_stmt_prepare($stmt, $sql)) {
+                    mysqli_stmt_bind_param($stmt, "sss", $fullName, $email, $passwordHash);
                     mysqli_stmt_execute($stmt);
-                    echo "<div class='alert alert-success'>You are Registered Successfully.</div>";
-
-                }   
-                else{
+                    echo "<div class='alert alert-success'>You are registered successfully.</div>";
+                } else {
                     die("Something went wrong.");
-                }         
+                }
             }
         }
         ?>
+
         <form action="Register.php" method="post">
-            <div class="form-group">
-                <input type="text" class="form-control" name="fullname" placeholder="Full Name:">
+            <div class="form-group mb-3">
+                <input type="text" class="form-control" name="fullname" placeholder="Full Name">
             </div>
-            <div class="form-group">
-                <input type="email" class="form-control" name="email" placeholder="Email:">
+            <div class="form-group mb-3">
+                <input type="email" class="form-control" name="email" placeholder="Email">
             </div>
-            <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="Password:">
+            <div class="form-group mb-3">
+                <input type="password" class="form-control" name="password" placeholder="Password">
             </div>
-            <div class="form-group">
-                <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password:">
+            <div class="form-group mb-3">
+                <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password">
             </div>
-            <div class="form-btn">
+            <div class="form-btn mb-3">
                 <input type="submit" class="btn btn-primary" value="Register" name="submit">
             </div>
         </form>
-          <div>
-            <div><P>Already Registered <a href="Login.php">Login Here </a></P></div>
-          </div>
-    </div> 
+
+        <div class="login-link">
+            <p>Already Registered? <a href="Login.php">Login Here</a></p>
+        </div>
+    </div>
+
 </body>
 </html>
