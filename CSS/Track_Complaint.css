@@ -1,0 +1,171 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    background-color: #03133f;
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;/* This makes space between logo and text */
+    align-items: center;
+}
+
+.logo img {
+    height: 60px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+nav {
+    flex-grow: 1;
+    text-align: right;
+}
+
+nav .navbar {
+    list-style: none;
+    display: inline-flex; /* Using inline-flex to align horizontally */
+    padding: 0;
+    margin: 0;
+}
+
+nav .navbar li {
+    margin-left: 20px;
+}
+
+nav .navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background: #0055a5;
+}
+
+/* Main Section */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #003366;
+}
+
+/* Form */
+.track-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.track-form label {
+    font-weight: bold;
+}
+
+.track-form input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.track-form button {
+    background: #003366;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.track-form button:hover {
+    background: #0055a5;
+}
+
+/* Table */
+.complaint-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.complaint-table th, .complaint-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.complaint-table th {
+    background: #003366;
+    color: white;
+}
+
+.complaint-table tr:hover {
+    background: #f1f1f1;
+}
+
+/* Status Colors */
+.status {
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.status.pending {
+    background: #ffcc00;
+    color: black;
+}
+
+.status.under-investigation {
+    background: #0066cc;
+    color: white;
+}
+
+.status.resolved {
+    background: #33cc33;
+    color: white;
+}
+
+/* No Complaints Message */
+.no-complaints {
+    text-align: center;
+    font-size: 18px;
+    color: #ff4444;
+    margin-top: 15px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #003366;
+    color: white;
+    margin-top: 20px;
+    font-size: 14px;
+}

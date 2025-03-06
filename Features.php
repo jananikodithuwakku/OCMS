@@ -224,7 +224,13 @@
                         <p>Users can request escalation and track their progress.</p>
                     </a>
                 </div>
-
+                <div class="feature-card">
+                    <a href="citizen_dashboard.php">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>View Complaint Status</h3>
+                        <p>Check the progress of your complaints and receive updates.</p>
+                     </a>
+                </div>
             </div>
         </div>
     </section>
