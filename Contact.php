@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("sss", $name, $email, $message);
 
         if ($stmt->execute()) {
-            echo "<script>alert('Message sent successfully!'); window.location.href='contact.php';</script>";
+            echo "<script>alert('Message sent successfully!'); window.location.href='Contact.php';</script>";
         } else {
             echo "<script>alert('Error sending message.');</script>";
         }
@@ -23,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Online Crime Management System</title>
     <link rel="stylesheet" href="CSS/Contact.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Font Awesome for Icons -->
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -42,9 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <nav>
             <ul>
                 <li><a href="Home.php">Home</a></li>
-                <li><a href="contact.php" class="active">Contact</a></li>
-                <li><a href="features.html">Features</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="Contact.php" class="active">Contact</a></li>
+                <li><a href="Features.php">Features</a></li>
+                <li><a href="Login.php">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -55,13 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2>Contact Us</h2>
             <p>If you have any queries, feel free to reach out to us.</p>
 
-            <!-- Display Messages -->
-            <?php if (!empty($success)): ?>
-                <p class="success"><?php echo $success; ?></p>
-            <?php elseif (!empty($error)): ?>
-                <p class="error"><?php echo $error; ?></p>
-            <?php endif; ?>
+           
 
+            <!-- Contact Form -->
             <div class="contact-form">
                 <form action="Contact.php" method="POST">
                     <label for="name">Full Name</label>
@@ -78,6 +74,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </section>
+     <!-- Contact Details -->
+     <div class="contact-details">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p><strong>Address:</strong> 123 Crime Prevention St, Colombo, Sri Lanka</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p><strong>Phone:</strong> +94 77 123 4567</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p><strong>Email:</strong> support@ocms.lk</p>
+                </div>
+            </div>
 
     <!-- Footer -->
     <footer class="footer">

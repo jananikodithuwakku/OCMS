@@ -81,6 +81,7 @@ while ($row = mysqli_fetch_assoc($status_result)) {
         <a href="Police_Officer_Unresolved.php"><i class="fas fa-briefcase"></i> View Escalated Cases</a>
         <a href="Police_Oficer_View_Complaints.php"><i class="fas fa-chart-bar"></i> Crime Analytics</a>
         <a href="Police_Officer_Update_Complaints.php"><i class="fas fa-edit"></i> Update Complaint</a>
+        <a href="Police_Officer_Alert.php"><i class="fa fa-warning"></i> Geolocation Alerts</a>
         <a href="Admin_Logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 

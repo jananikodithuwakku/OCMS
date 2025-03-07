@@ -21,7 +21,7 @@ $result = mysqli_query($conn, $sql);
             background-color: #f4f7f6;
         }
         header {
-            background-color: #007bff;
+            background-color:rgb(2, 7, 59);
             color: white;
             padding: 20px;
         }
