@@ -11,22 +11,115 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complaint Reports</title>
-    <link rel="stylesheet" href="CSS/Track_Complaint.css">
+    <title>Crime Complaint Reports</title>
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: #1e3c72; /* Dark blue gradient background */
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+        }
+
+        nav {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            background: rgba(255, 255, 255, 0.2); /* Transparent buttons */
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Main Content */
+        main {
+            width: 90%;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px); /* Glass effect */
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: white;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+            color: white;
+        }
+
+        table, th, td {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.2); /* Slightly transparent */
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
 </head>
 <body>
+
     <header>
         <h1>Crime Complaint Reports</h1>
         <nav>
-            <ul>
-                <li><a href="Home.php">Home</a></li>
-            </ul>
+            <a href="Home.php">Home</a>
+            <a href="Admin_Logout.php">Logout</a>
         </nav>
     </header>
-    
+
     <main>
         <h2>All Crime Reports</h2>
-        <table border="1">
+        <table>
             <tr>
                 <th>Case ID</th>
                 <th>Date</th>
@@ -61,6 +154,7 @@ $result = mysqli_query($conn, $sql);
             <?php } ?>
         </table>
     </main>
+
 </body>
 </html>
 

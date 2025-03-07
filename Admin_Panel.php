@@ -1,20 +1,43 @@
 <?php
 session_start();
-include("database.php");
+include 'database.php'; // Database connection
 
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = md5($_POST['password']);  // MD5 Hash
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = $_POST['password'];
 
-    $sql = "SELECT * FROM admin WHERE username = '$username' AND password = '$password'";
-    $result = $conn->query($sql);
+    // Check if user exists
+    $sql = "SELECT * FROM admin WHERE username='$username'";
+    $result = mysqli_query($conn, $sql);
 
-    if ($result->num_rows > 0) {
-        $_SESSION['admin'] = $username;
-        header("Location: Home.php");
-        exit();
+    if ($result && mysqli_num_rows($result) == 1) {
+        $user = mysqli_fetch_assoc($result);
+
+        // Verify password
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+
+            // Redirect based on role
+            switch ($user['role']) {
+                case 'admin':
+                    header("Location: AD.php");
+                    break;
+                case 'police_officer':
+                    header("Location: Police_Officer_Dashboard.php");
+                    break;
+                case 'support_personnel':
+                    header("Location: support_dashboard.php");
+                    break;
+                default:
+                    $error = "Invalid role.";
+            }
+            exit();
+        } else {
+            $error = "Invalid password.";
+        }
     } else {
-        $error = "Invalid Username or Password!";
+        $error = "Invalid username.";
     }
 }
 ?>
@@ -24,17 +47,21 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="CSS/Admin_Panel.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="CSS/login.css">
 </head>
 <body>
     <div class="login-container">
-        <h2>Admin Login</h2>
-        <?php if(isset($error)) { echo "<p class='error'>$error</p>"; } ?>
-        <form action="" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit" name="login">Login</button>
+        <h2>Login</h2>
+        <?php if (isset($error)) echo "<p style='color: red;'>$error</p>"; ?>
+        <form method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
         </form>
     </div>
 </body>
