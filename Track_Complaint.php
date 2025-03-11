@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <th>Date</th>
                     <th>Status</th>
                     <th>Notes</th>
-                    <th>Action</th> <!-- New Column for Download Report -->
+                    <th>Action</th> 
                 </tr>
                 <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                     <tr>
