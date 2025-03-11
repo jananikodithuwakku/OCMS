@@ -41,6 +41,13 @@ while ($row = mysqli_fetch_assoc($status_result)) {
             background-color: #0A1931;
             padding-top: 20px;
         }
+        .sidebar .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .sidebar .logo img {
+            width: 120px;
+        }
         .sidebar a {
             display: block;
             color: #ffffff;
@@ -77,6 +84,9 @@ while ($row = mysqli_fetch_assoc($status_result)) {
 
     <!-- Sidebar -->
     <div class="sidebar">
+    <div class="logo">
+            <img src="Images/Logo.png" alt="Logo">
+        </div>
         <a href="police_officer_dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
         <a href="Police_Officer_Unresolved.php"><i class="fas fa-briefcase"></i> View Escalated Cases</a>
         <a href="Police_Oficer_View_Complaints.php"><i class="fas fa-chart-bar"></i> Crime Analytics</a>

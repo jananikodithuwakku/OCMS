@@ -4,11 +4,12 @@ include 'database.php'; // Ensure database connection is correct
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
+    $phone_number = $_POST['phone'];  // Capture phone number
     $message = $_POST['message'];
 
-    if (!empty($name) && !empty($email) && !empty($message)) {
-        $stmt = $conn->prepare("INSERT INTO contact (name, email, message) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $name, $email, $message);
+    if (!empty($name) && !empty($email) && !empty($phone_number) && !empty($message)) {
+        $stmt = $conn->prepare("INSERT INTO contact (name, email, phone_number, message) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $name, $email, $phone_number, $message);  // Use phone_number in the query
 
         if ($stmt->execute()) {
             echo "<script>alert('Message sent successfully!'); window.location.href='Contact.php';</script>";
@@ -55,8 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2>Contact Us</h2>
             <p>If you have any queries, feel free to reach out to us.</p>
 
-           
-
             <!-- Contact Form -->
             <div class="contact-form">
                 <form action="Contact.php" method="POST">
@@ -66,6 +65,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" required>
 
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" placeholder="Enter 10-digit phone number">
+
                     <label for="message">Your Message</label>
                     <textarea id="message" name="message" rows="5" required></textarea>
 
@@ -74,21 +76,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </section>
-     <!-- Contact Details -->
-     <div class="contact-details">
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <p><strong>Address:</strong> 123 Crime Prevention St, Colombo, Sri Lanka</p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <p><strong>Phone:</strong> +94 77 123 4567</p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <p><strong>Email:</strong> support@ocms.lk</p>
-                </div>
-            </div>
+
+    <!-- Contact Details -->
+    <div class="contact-details">
+        <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <p><strong>Address:</strong> 123 Crime Prevention St, Colombo, Sri Lanka</p>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <p><strong>Phone:</strong> +94 77 123 4567</p>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <p><strong>Email:</strong> support@ocms.lk</p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">

@@ -156,7 +156,7 @@
         <nav>
             <ul>
                 <li><a href="Home.php">Home</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="Contact.php">Contact</a></li>
                 <li><a href="Features.php" class="active">Features</a></li>
                 <li><a href="Login.php">Login</a></li>
             </ul>
@@ -198,14 +198,6 @@
                         <i class="fas fa-bell"></i>
                         <h3>Geolocation Alerts</h3>
                         <p>Receive location-based alerts and safety notifications.</p>
-                    </a>
-                </div>
-
-                <div class="feature-card">
-                    <a href="role_based_access.html">
-                        <i class="fas fa-user-lock"></i>
-                        <h3>Role-Based Access</h3>
-                        <p>Secure access for citizens, police officers, and administrators.</p>
                     </a>
                 </div>
 

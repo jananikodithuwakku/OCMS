@@ -49,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <th>Date</th>
                     <th>Status</th>
                     <th>Notes</th>
+                    <th>Action</th> <!-- New Column for Download Report -->
                 </tr>
                 <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                     <tr>
@@ -59,6 +60,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <?php echo htmlspecialchars($row['status'] ?? 'Pending'); ?>
                         </td>
                         <td><?php echo htmlspecialchars($row['notes'] ?? 'No updates yet'); ?></td>
+                        <td>
+                            <?php if (strtolower($row['status']) == 'resolved') { ?>
+                                <a href="download_report.php?id=<?php echo $row['id']; ?>" class="download-btn">
+                                    Download Report
+                                </a>
+                            <?php } else { ?>
+                                <span class="pending-text">Not available</span>
+                            <?php } ?>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>

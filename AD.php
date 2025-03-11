@@ -109,10 +109,10 @@ while ($row = mysqli_fetch_assoc($result)) {
         <div class="logo">
             <img src="Images/Logo.png" alt="Logo">
         </div>
-        <a href="admin_dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
-        <a href="Admin_add_faq.php"><i class="fas fa-robot"></i> Chatbot Update</a>
+        <a href="AD.php"><i class="fas fa-home"></i> Dashboard</a>
         <a href="Analytics_Report.php"><i class="fas fa-chart-line"></i> Resolved Cases</a>
         <a href="Admin_Logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        
     </div>
 
     <!-- Main Content -->

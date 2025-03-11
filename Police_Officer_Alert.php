@@ -151,41 +151,44 @@
 
     <?php
     // Include database connection
-    require 'database.php';
+    // Include database connection
+require 'database.php';
 
-    // Fetch data from the citizens table
-    $sql = "SELECT id, email, latitude, longitude FROM citizens";
-    $result = mysqli_query($conn, $sql);
+// Fetch data from the citizens table
+$sql = "SELECT id, email, latitude, longitude, location_name FROM citizens";
+$result = mysqli_query($conn, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        // Start the table
-        echo "<table>
-                <tr>
-                    <th>ID</th>
-                    <th>Email</th>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
-                </tr>";
+if (mysqli_num_rows($result) > 0) {
+    // Start the table
+    echo "<table>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Location Name</th> 
+            </tr>";
 
-        // Loop through each row in the result set
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>
-                    <td>{$row['id']}</td>
-                    <td>{$row['email']}</td>
-                    <td>{$row['latitude']}</td>
-                    <td>{$row['longitude']}</td>
-                  </tr>";
-        }
-
-        // End the table
-        echo "</table>";
-    } else {
-        echo "<p style='text-align: center;'>No registered citizens found.</p>";
+    // Loop through each row in the result set
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>
+                <td>{$row['id']}</td>
+                <td>{$row['email']}</td>
+                <td>{$row['latitude']}</td>
+                <td>{$row['longitude']}</td>
+                <td>{$row['location_name']}</td> 
+              </tr>";
     }
 
-    // Close the database connection
-    mysqli_close($conn);
-    ?>
+    // End the table
+    echo "</table>";
+} else {
+    echo "<p style='text-align: center;'>No registered citizens found.</p>";
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
 
     <h1>Officer Crime Alert</h1>
     <form action="Police_Officer_send_alert.php" method="POST">

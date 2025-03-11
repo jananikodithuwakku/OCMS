@@ -10,14 +10,15 @@ function sendLocation(position) {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     let userEmail = prompt("Enter your email to receive alerts:");
+    let locationName = prompt("Enter your location name:"); // New input
 
-    if (!userEmail) {
-        document.getElementById("alert-message").innerHTML = "<p>Email is required for alerts.</p>";
+    if (!userEmail || !locationName) {
+        document.getElementById("alert-message").innerHTML = "<p>Email and location name are required for alerts.</p>";
         return;
     }
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "send_alert.php", true);
+    xhr.open("POST", "Police_Officer_send_alert.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
@@ -25,7 +26,7 @@ function sendLocation(position) {
         }
     };
 
-    let params = `email=${userEmail}&latitude=${latitude}&longitude=${longitude}&register=true`;
+    let params = `email=${userEmail}&latitude=${latitude}&longitude=${longitude}&location_name=${locationName}&register=true`;
     xhr.send(params);
 }
 

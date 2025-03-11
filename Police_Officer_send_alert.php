@@ -79,6 +79,7 @@ if (isset($_POST['register'])) {
         }
     }
 
-    echo '✅ Crime alerts sent successfully!';
+    echo '✅ Crime alerts sent successfully! <a href="Police_Officer_Dashboard.php" style="color: #fff; background-color: #16a085; padding: 8px 12px; text-decoration: none; border-radius: 4px; margin-left: 10px;">Back to Dashboard</a>';
+
 }
 ?>

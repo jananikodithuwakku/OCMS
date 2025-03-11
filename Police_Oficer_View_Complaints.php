@@ -53,7 +53,7 @@ $result = mysqli_query($conn, $sql);
         }
         table th {
             background-color: #007bff;
-            color: white;
+            color: black;
             padding: 10px;
             text-align: left;
         }
@@ -62,7 +62,7 @@ $result = mysqli_query($conn, $sql);
             border: 1px solid #ddd;
         }
         table tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
+            background-color:rgb(252, 246, 246);
         }
         table tbody tr:hover {
             background-color: #f1f1f1;
