@@ -21,7 +21,7 @@ if (isset($_POST['register'])) {
     $latitude = $_POST['latitude']; 
     $longitude = $_POST['longitude']; 
 
-    $sql = "INSERT INTO citizens (email, latitude, longitude) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO citizen_geolocation (email, latitude, longitude) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sdd", $email, $latitude, $longitude);
 
@@ -36,7 +36,7 @@ if (isset($_POST['register'])) {
     $crime_longitude = $_POST['longitude'];
 
     // Find registered users near crime location (within 5 km)
-    $sql = "SELECT email, latitude, longitude FROM citizens WHERE 
+    $sql = "SELECT email, latitude, longitude FROM citizen_geolocation WHERE 
             (6371 * ACOS(COS(RADIANS(?)) * COS(RADIANS(latitude)) * 
             COS(RADIANS(longitude) - RADIANS(?)) + SIN(RADIANS(?)) * 
             SIN(RADIANS(latitude)))) <= 5";

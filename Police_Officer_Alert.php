@@ -154,8 +154,8 @@
     // Include database connection
 require 'database.php';
 
-// Fetch data from the citizens table
-$sql = "SELECT id, email, latitude, longitude, location_name FROM citizens";
+// Fetch data from the citizen_geolocation table
+$sql = "SELECT id, email, latitude, longitude, location_name FROM citizen_geolocation";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
