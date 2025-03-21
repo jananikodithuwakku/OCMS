@@ -113,6 +113,7 @@ $is_verified = $row['is_verified'];
             <img src="Images/Logo.png" alt="Logo">
         </div>
         <a href="citizen_dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="Home.php"><i class="fas fa-home"></i> Home</a>
         <a href="Logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 

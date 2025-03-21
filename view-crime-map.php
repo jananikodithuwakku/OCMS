@@ -9,10 +9,49 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
     
     <style>
-        body { margin: 0; font-family: Arial, sans-serif; }
-        h1 { text-align: center; padding: 10px; }
+       body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        nav {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-left: 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover {
+            color: #0056b3;
+        }
+
         #map { height: 600px; width: 100%; }
-        
         /* Legend Styles */
         .legend {
             position: absolute;
@@ -35,7 +74,17 @@
 <body>
 
     <h1>Crime Map of Sri Lanka</h1>
+
+    <nav>
+        <ul>
+            <li><a href="Home.php">Home</a></li>
+            <li><a href="Features.php">Features</a></li>
+        </ul>
+    </nav>
+
     <div id="map"></div>
+
+    
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>

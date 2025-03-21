@@ -41,12 +41,85 @@ try {
     $mail->Body = "Your OTP for email verification is: <b>$otp</b>. It expires in 5 minutes.";
 
     $mail->send();
-    echo "OTP sent to your email.";
+    $otp_message = "OTP sent to your email.";
 } catch (Exception $e) {
-    echo "Failed to send OTP. Error: {$mail->ErrorInfo}";
+    $otp_message = "Failed to send OTP. Error: {$mail->ErrorInfo}";
 }
 ?>
-<form action="Citizen_verify_email.php" method="post">
-    <!-- Your OTP input fields go here -->
-    <button type="submit" name="verifyButton" id="verifyButton">Verify</button>
-</form>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        #verifyButton {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease-in-out;
+        }
+
+        #verifyButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Your OTP</h2>
+        <form action="Citizen_verify_email.php" method="post">
+            <input type="text" name="otp" placeholder="Enter OTP" required>
+            <button type="submit" name="verifyButton" id="verifyButton">Verify</button>
+        </form>
+    </div>
+</body>
+</html>
+
+
+</body>
+</html>
