@@ -161,12 +161,12 @@
         legend.onAdd = function(map) {
             var div = L.DomUtil.create("div", "legend");
             div.innerHTML += "<b>Crime Levels</b><br>";
-            div.innerHTML += '<i style="background: #660000"></i> > 1000 crimes<br>';
-            div.innerHTML += '<i style="background: #990000"></i> 750 - 1000 crimes<br>';
-            div.innerHTML += '<i style="background: #CC3300"></i> 500 - 750 crimes<br>';
-            div.innerHTML += '<i style="background: #FF6600"></i> 250 - 500 crimes<br>';
-            div.innerHTML += '<i style="background: #FFCC00"></i> 150 - 250 crimes<br>';
-            div.innerHTML += '<i style="background: #FFFF66"></i> < 150 crimes<br>';
+            div.innerHTML += '<i style="background:rgb(36, 3, 3)"></i> > 1000 crimes<br>';
+            div.innerHTML += '<i style="background:rgb(129, 8, 8)"></i> 750 - 1000 crimes<br>';
+            div.innerHTML += '<i style="background:rgb(146, 49, 17)"></i> 500 - 750 crimes<br>';
+            div.innerHTML += '<i style="background:rgb(187, 86, 18)"></i> 250 - 500 crimes<br>';
+            div.innerHTML += '<i style="background:rgb(194, 159, 22)"></i> 150 - 250 crimes<br>';
+            div.innerHTML += '<i style="background:rgb(214, 214, 17)"></i> < 150 crimes<br>';
             return div;
         };
 

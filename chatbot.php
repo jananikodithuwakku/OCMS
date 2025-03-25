@@ -8,7 +8,7 @@ $userMessage = strtolower(trim($data["message"]));
 
 $response = "I'm sorry, I couldn't find an answer. Try asking about crime reporting, complaint tracking, or website features.";
 
-// 1️⃣ **Check FAQ database**
+// **Check FAQ database**
 $stmt = $conn->prepare("SELECT answer FROM faqs WHERE ? LIKE CONCAT('%', keywords, '%')");
 $stmt->bind_param("s", $userMessage);
 $stmt->execute();
@@ -18,7 +18,7 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $response = $row["answer"];
 } else {
-    // 2️⃣ **Check if user asks about complaint status**
+    // **Check if user asks about complaint status**
     if (strpos($userMessage, "status") !== false || strpos($userMessage, "complaint") !== false) {
         preg_match('/\d+/', $userMessage, $matches);
         if (!empty($matches[0])) {
@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
     }
 }
 
-// 3️⃣ **Save conversation in chatbot_logs**
+// **Save conversation in chatbot_logs**
 $stmt = $conn->prepare("INSERT INTO chatbot_logs (user_question, bot_response) VALUES (?, ?)");
 $stmt->bind_param("ss", $userMessage, $response);
 $stmt->execute();

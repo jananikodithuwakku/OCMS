@@ -7,17 +7,31 @@ session_start();
 $query = "SELECT * FROM cases WHERE escalation_requested = 1";
 $result = $conn->query($query);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
-    $case_id = $_POST['case_id'];
-    $new_status = $_POST['status'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['update_status'])) {
+        $case_id = $_POST['case_id'];
+        $new_status = $_POST['status'];
 
-    // Update case status
-    $update_query = "UPDATE cases SET status = ?, escalation_requested = 0 WHERE id = ?";
-    $stmt = $conn->prepare($update_query);
-    $stmt->bind_param("si", $new_status, $case_id);
-    $stmt->execute();
+        // Update case status
+        $update_query = "UPDATE cases SET status = ?, escalation_requested = 0 WHERE id = ?";
+        $stmt = $conn->prepare($update_query);
+        $stmt->bind_param("si", $new_status, $case_id);
+        $stmt->execute();
 
-    echo "<script>alert('Case status updated successfully!'); window.location.href='Police_Officer_Unresolved.php';</script>";
+        echo "<script>alert('Case status updated successfully!'); window.location.href='Police_Officer_Unresolved.php';</script>";
+    }
+
+    if (isset($_POST['delete_case'])) {
+        $case_id = $_POST['case_id'];
+
+        // Delete case from the database
+        $delete_query = "DELETE FROM cases WHERE id = ?";
+        $stmt = $conn->prepare($delete_query);
+        $stmt->bind_param("i", $case_id);
+        $stmt->execute();
+
+        echo "<script>alert('Case deleted successfully!'); window.location.href='Police_Officer_Unresolved.php';</script>";
+    }
 }
 ?>
 
@@ -72,11 +86,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
         .btn-update:hover {
             background-color: #218838;
         }
-        .btn-cancel {
+        .btn-delete {
             background-color: #dc3545;
             color: white;
         }
-        .btn-cancel:hover {
+        .btn-delete:hover {
             background-color: #c82333;
         }
     </style>
@@ -89,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
         </div>
         <a href="police_officer_dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
         <a href="Police_Officer_Unresolved.php"><i class="fas fa-briefcase"></i> Escalated Cases</a>
-        <a href="Logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <a href="Admin_Logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 
     <!-- Main Content -->
@@ -114,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
                             <td><?= $row['escalation_reason']; ?></td>
                             <td><?= $row['status']; ?></td>
                             <td>
-                                <form method="post">
+                                <form method="post" class="d-inline">
                                     <input type="hidden" name="case_id" value="<?= $row['id']; ?>">
                                     <div class="form-group">
                                         <select name="status" class="form-select" required>
@@ -123,6 +137,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
                                         </select>
                                     </div>
                                     <button type="submit" name="update_status" class="btn btn-update mt-2">Update Status</button>
+                                </form>
+                                <form method="post" class="d-inline">
+                                    <input type="hidden" name="case_id" value="<?= $row['id']; ?>">
+                                    <button type="submit" name="delete_case" class="btn btn-delete mt-2" onclick="return confirm('Are you sure you want to delete this case?');">Delete</button>
                                 </form>
                             </td>
                         </tr>

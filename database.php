@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Database credentials
-$hostName = "localhost:3306";  // Change port if needed
+$hostName = "localhost:3307";  // Change port if needed
 $dbUser = "root";
 $dbPassword = "";
 $dbName = "ocms";
