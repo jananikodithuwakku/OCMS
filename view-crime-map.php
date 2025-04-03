@@ -79,6 +79,7 @@
         <ul>
             <li><a href="Home.php">Home</a></li>
             <li><a href="Features.php">Features</a></li>
+            <li><a href="Type_Crime.php">Types of Crimes</a></li>
         </ul>
     </nav>
 

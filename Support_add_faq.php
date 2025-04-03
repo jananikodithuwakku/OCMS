@@ -24,29 +24,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>Add FAQs</title>
     
     <style>
         /* General Styles */
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #141e30, #243b55);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color:rgb(112, 119, 129);
             margin: 0;
+            padding: 0;
+            display: flex;
         }
 
-        /* Form Container */
+        /* Sidebar */
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            background-color: #0A1931;
+            padding-top: 20px;
+        }
+
+        .sidebar .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar .logo img {
+            width: 120px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #ffffff;
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .sidebar a:hover {
+            background-color: #1B2C53;
+        }
+
+        /* Main Content */
         .faq-container {
             background: rgba(255, 255, 255, 0.1);
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
             text-align: center;
             width: 400px;
             backdrop-filter: blur(10px);
+            margin: auto;
+            position: relative;
+            top: 50px;
         }
 
         /* Heading */
@@ -75,6 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
             font-size: 16px;
+            outline: none;
         }
 
         input::placeholder, textarea::placeholder {
@@ -92,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             width: 100%;
             padding: 10px;
             margin-top: 20px;
-            background: #0f2027;
+            background: #01a9db;
             color: white;
             border: none;
             border-radius: 5px;
@@ -102,18 +135,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         button:hover {
-            background: #01a9db;
+            background: #0288d1;
         }
 
         /* Responsive Design */
-        @media (max-width: 400px) {
+        @media (max-width: 600px) {
             .faq-container {
                 width: 90%;
             }
         }
+
     </style>
 </head>
 <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="Images/Logo.png" alt="Logo">
+        </div>
+        <a href="support_dashboard.php"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="Support_add_faq.php"><i class="fas fa-robot"></i> Chatbot Update</a>
+        <a href="Support_Analytics.php"><i class="fas fa-envelope"></i> Contact Messages</a>
+        <a href="Admin_Logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
     <div class="faq-container">
         <h2>Add New FAQ</h2>
         
