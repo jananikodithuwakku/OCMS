@@ -30,6 +30,16 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $row = mysqli_fetch_assoc($result);
 $is_verified = $row['is_verified'];
+
+// Fetch case statistics for the chart (case status counts)
+$status_counts = ["Pending" => 0, "In Progress" => 0, "Resolved" => 0];
+$sql_status = "SELECT status, COUNT(*) as count FROM crime_reports GROUP BY status";
+$status_result = mysqli_query($conn, $sql_status);
+while ($row = mysqli_fetch_assoc($status_result)) {
+    if (isset($status_counts[$row['status']])) {
+        $status_counts[$row['status']] = $row['count'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +53,7 @@ $is_verified = $row['is_verified'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="CSS/Citizen_Dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         /* Sidebar Styles */
@@ -103,6 +114,16 @@ $is_verified = $row['is_verified'];
         .table th, .table td {
             vertical-align: middle;
         }
+        .chart-container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 </head>
 <body>
@@ -124,6 +145,13 @@ $is_verified = $row['is_verified'];
                 <h1 class="text-white">Citizen Dashboard</h1>
             </div>
         </header>
+
+        <!-- Crime Status Chart -->
+        <div class="chart-container">
+            <h4>Crime Case Status Distribution</h4>
+            <canvas id="crimeStatusChart" width="400" height="400"></canvas>
+        </div>
+
 
         <main class="container mt-4">
             <h2 class="text-center text-uppercase text-dark">My Complaints</h2>
@@ -180,6 +208,22 @@ $is_verified = $row['is_verified'];
             <p class="mb-0">&copy; 2025 Online Crime Management System. All Rights Reserved.</p>
         </footer>
     </div>
+
+    <!-- Chart.js Script -->
+    <script>
+        var ctx = document.getElementById('crimeStatusChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ["Pending", "In Progress", "Resolved"],
+                datasets: [{
+                    label: "Case Status",
+                    data: <?= json_encode(array_values($status_counts)) ?>,
+                    backgroundColor: ['#FF5733', '#FFD700', '#28A745']
+                }]
+            }
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

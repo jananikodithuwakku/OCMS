@@ -142,7 +142,7 @@ $result = $conn->query($query);
     </header>
 
 <div class="container">
-    <h2 class="mb-4">📌 Track Cases</h2>
+    <h2 class="mb-4"> Track Unresolved Cases</h2>
     <div class="table-container">
         <table class="table table-hover">
             <thead>

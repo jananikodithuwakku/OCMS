@@ -216,10 +216,19 @@
                         <p>Users can request escalation and track their progress.</p>
                     </a>
                 </div>
+
+                <div class="feature-card">
+                    <a href="C_Track_Unresolved.php">
+                        <i class="fas fa-search"></i>
+                        <h3>Unresolved Case Tracking</h3>
+                        <p>Users can track the progress of their Unresolved cases and receive updates.</p>
+                    </a>
+                </div>
+
                 <div class="feature-card">
                     <a href="citizen_dashboard.php">
                         <i class="fas fa-clipboard-list"></i>
-                        <h3>View Complaint Status</h3>
+                        <h3>View Profile with Complaint Status</h3>
                         <p>Check the progress of your complaints and receive updates.</p>
                      </a>
                 </div>
